@@ -9,19 +9,17 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 @SuppressWarnings("unused")
-public class SlashCommand {
+public abstract class AbstractSlashCommand {
 
     private final String name;
     private final SlashCommandData commandData;
 
-    public SlashCommand(@NotNull String name, @NotNull String description, @Nullable SlashCommandOption... options){
+    public AbstractSlashCommand(@NotNull String name, @NotNull String description, @Nullable SlashCommandOption... options){
         this.name = name;
         this.commandData = Commands.slash(name, description);
-        if(Objects.nonNull(options)){
-            for(SlashCommandOption option : options){
+        if(Objects.nonNull(options))
+            for(SlashCommandOption option : options)
                 this.commandData.addOption(option.optionType(), option.name(), option.description(), option.required());
-            }
-        }
     }
 
     public String getName() {
@@ -32,7 +30,5 @@ public class SlashCommand {
         return commandData;
     }
 
-    public void onCalled(SlashCommandInteraction e){
-
-    }
+    public abstract void callback(@NotNull SlashCommandInteraction e);
 }
