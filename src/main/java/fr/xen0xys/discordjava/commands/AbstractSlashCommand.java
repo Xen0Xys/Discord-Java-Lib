@@ -1,5 +1,6 @@
 package fr.xen0xys.discordjava.commands;
 
+import fr.xen0xys.discordjava.DJBot;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
@@ -30,5 +31,5 @@ public abstract class AbstractSlashCommand {
         return commandData;
     }
 
-    public abstract void callback(@NotNull SlashCommandInteraction e);
+    public abstract void callback(@NotNull DJBot bot, @NotNull SlashCommandInteraction e);
 }

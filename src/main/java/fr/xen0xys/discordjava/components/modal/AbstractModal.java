@@ -1,5 +1,6 @@
 package fr.xen0xys.discordjava.components.modal;
 
+import fr.xen0xys.discordjava.DJBot;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.modals.Modal;
@@ -27,6 +28,6 @@ public abstract class AbstractModal {
         return this.modal;
     }
 
-    public abstract void callback(@NotNull ModalInteractionEvent e);
+    public abstract void callback(@NotNull DJBot bot, @NotNull ModalInteractionEvent e);
 
 }
