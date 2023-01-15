@@ -20,8 +20,8 @@ public class SampleSlashCommand extends AbstractSlashCommand {
     @Override
     public void callback(@NotNull DJBot bot, @NotNull SlashCommandInteraction e) {
         long targetChannelId = Objects.requireNonNull(e.getOption("channel")).getAsLong();
-        AbstractModal modal = new SampleModal(targetChannelId);
-        bot.handleModal(e.getUser().getIdLong(), modal);
+        AbstractModal modal = new SampleModal(bot, targetChannelId);
+        modal.register(bot, e.getUser().getIdLong());
         e.replyModal(modal.getModal()).queue();
     }
 }
