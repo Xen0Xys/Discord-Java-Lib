@@ -20,6 +20,10 @@ public abstract class AbstractModal {
 
     }
 
+    public void register(DJBot bot, long senderId){
+        bot.getComponentsManager().handleModal(senderId, this);
+    }
+
     public String getId() {
         return id;
     }
