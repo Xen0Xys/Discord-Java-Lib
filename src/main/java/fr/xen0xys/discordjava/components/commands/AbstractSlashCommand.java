@@ -1,6 +1,8 @@
-package fr.xen0xys.discordjava.commands;
+package fr.xen0xys.discordjava.components.commands;
 
-import fr.xen0xys.discordjava.DJBot;
+import fr.xen0xys.discordjava.DJApp;
+import fr.xen0xys.discordjava.components.interfaces.ICommandComponent;
+import fr.xen0xys.discordjava.components.managers.CommandsManager;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
@@ -11,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 @SuppressWarnings("unused")
-public abstract class AbstractSlashCommand {
+public abstract class AbstractSlashCommand implements ICommandComponent {
 
     private final String name;
     private final SlashCommandData commandData;
@@ -24,12 +26,14 @@ public abstract class AbstractSlashCommand {
                 this.commandData.addOption(option.optionType(), option.name(), option.description(), option.required());
     }
 
-    public void register(@NotNull DJBot bot, boolean sync){
-        bot.getCommandsManager().registerCommand(this, sync);
+    @Override
+    public void register(@NotNull CommandsManager commandsManager, boolean sync) {
+        commandsManager.registerCommand(this, sync);
     }
 
-    public void registerLocal(@NotNull DJBot bot, @NotNull Guild guild, boolean sync){
-        bot.getCommandsManager().registerLocalCommand(guild, this, sync);
+    @Override
+    public void registerLocal(@NotNull CommandsManager commandsManager, @NotNull Guild guild, boolean sync) {
+        commandsManager.registerLocalCommand(guild, this, sync);
     }
 
     public String getName() {
@@ -40,5 +44,5 @@ public abstract class AbstractSlashCommand {
         return commandData;
     }
 
-    public abstract void callback(@NotNull DJBot bot, @NotNull SlashCommandInteraction e);
+    public abstract void callback(@NotNull DJApp bot, @NotNull SlashCommandInteraction e);
 }
