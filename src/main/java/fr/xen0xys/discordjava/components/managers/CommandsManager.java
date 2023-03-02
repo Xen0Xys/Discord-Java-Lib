@@ -1,6 +1,7 @@
-package fr.xen0xys.discordjava.commands;
+package fr.xen0xys.discordjava.components.managers;
 
-import fr.xen0xys.discordjava.DJBot;
+import fr.xen0xys.discordjava.DJApp;
+import fr.xen0xys.discordjava.components.commands.AbstractSlashCommand;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -11,13 +12,14 @@ import java.util.List;
 
 public class CommandsManager extends ListenerAdapter {
 
-    private final DJBot bot;
+    private final DJApp bot;
 
     private final List<AbstractSlashCommand> commands = new ArrayList<>();
 
-    public CommandsManager(@NotNull DJBot bot){
+    public CommandsManager(@NotNull DJApp bot){
         this.bot = bot;
         this.bot.getJDA().addEventListener(this);
+        this.bot.getLogger().info("Commands manager initialized !");
     }
 
     public void registerCommand(@NotNull AbstractSlashCommand command, boolean sync){
