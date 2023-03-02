@@ -24,25 +24,36 @@ To use this library in your project, you can include it as a dependency in your 
 ```
 
 ## Usage
-To use this library, you need to create a new instance of the DiscordBot class and use its run() method to start the bot.
+To use this library, you need to create a new instance of the DJApp class, and it's ready to use!
 
-Here is an example of how to use this library to create a simple "echo" bot that repeats everything that is said in the chat:
+Here is an example of how to use this library to create the bot:
 
 ```java
-import com.example.discord.DiscordBot;
+public class SampleBot {
 
-public class MyBot {
-  public static void main(String[] args) {
-      DJBot bot = new DJBot("token");
-  }
+    public static void main(String[] args){
+        Configuration config = new Configuration(new File("data"), "config.yml");
+        try {
+            DJApp bot = new DJApp(config.getToken(),"SampleBot");
+            IdUtils idUtils = new IdUtils(bot);
+            Guild guild = idUtils.getGuildFromId(1016358670600245369L);
+            if(guild != null)
+                new SampleSlashCommand().registerLocal(bot.getCommandsManager(), guild, true);
+            Scanner scanner = new Scanner(System.in);
+            while (scanner.hasNextLine()){
+                String line = scanner.nextLine();
+                if(line.equals("stop")){
+                    bot.stop();
+                    break;
+                }
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 ```
-
-To customize the behavior of your bot, you can use the onMessageReceived() method to register a callback that will be called every time a message is received.
-
-Here is an example of how to modify the above example to implement the "echo" behavior:
-
-For more information on how to customize your bot's behavior, please refer to the documentation for the JDA library.
+*Check sample code for more information!*
 
 ## License
 This library is licensed under the GPL-3.0 License. See the LICENSE file for more details.
