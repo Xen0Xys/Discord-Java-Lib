@@ -1,6 +1,6 @@
 package fr.xen0xys.discordjava.utils;
 
-import fr.xen0xys.discordjava.DJBot;
+import fr.xen0xys.discordjava.DJApp;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import org.jetbrains.annotations.NotNull;
@@ -9,9 +9,9 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("unused")
 public class IdUtils {
 
-    private final DJBot bot;
+    private final DJApp bot;
 
-    public IdUtils(@NotNull DJBot bot) {
+    public IdUtils(@NotNull DJApp bot) {
         this.bot = bot;
     }
 
