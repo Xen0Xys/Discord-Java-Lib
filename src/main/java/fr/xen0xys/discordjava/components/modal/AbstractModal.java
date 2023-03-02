@@ -1,8 +1,8 @@
 package fr.xen0xys.discordjava.components.modal;
 
 import fr.xen0xys.discordjava.DJApp;
-import fr.xen0xys.discordjava.components.managers.ComponentsManager;
 import fr.xen0xys.discordjava.components.interfaces.IHandledComponent;
+import fr.xen0xys.discordjava.components.managers.ComponentsManager;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.modals.Modal;
