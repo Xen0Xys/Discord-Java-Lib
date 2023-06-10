@@ -18,7 +18,7 @@ To use this library in your project, you can include it as a dependency in your 
     <dependency>
         <groupId>fr.xen0xys</groupId>
         <artifactId>discord-java-lib</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.1.1-beta</version>
     </dependency>
 </dependencies>
 ```
