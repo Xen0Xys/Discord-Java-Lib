@@ -10,10 +10,7 @@ import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ComponentsManager extends ListenerAdapter {
 
@@ -61,8 +58,9 @@ public class ComponentsManager extends ListenerAdapter {
 
     @Override
     public void onButtonInteraction(@NotNull final ButtonInteractionEvent e) {
-        if(this.registeredButtons.stream().anyMatch(button -> button.getId().equals(e.getComponentId())))
-            ((AbstractStaticButton) e.getButton()).callback(this.bot, e);
+        AbstractStaticButton staticButton = this.registeredButtons.stream().filter(b -> b.getId().equals(e.getComponentId())).findFirst().orElse(null);
+        if(Objects.nonNull(staticButton))
+            staticButton.callback(this.bot, e);
         else if(this.handledButtons.containsKey(e.getUser().getIdLong())){
             AbstractButton button = this.handledButtons.get(e.getUser().getIdLong());
             if(button.getId().equals(e.getComponentId())){
