@@ -30,6 +30,14 @@ public class DJApp extends ListenerAdapter {
         jda.addEventListener(this);
     }
 
+    public DJApp(@NotNull final String token, @NotNull final Logger logger) throws InterruptedException {
+        this.logger = logger;
+        this.jda = JDABuilder.createDefault(token).build().awaitReady();
+        this.commandsManager = new CommandsManager(this);
+        this.componentsManager = new ComponentsManager(this);
+        jda.addEventListener(this);
+    }
+
     private void setupLogger(@NotNull final String loggerName){
         try {
             InputStream stream = DJApp.class.getClassLoader().getResourceAsStream("logging.properties");
