@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
+import net.dv8tion.jda.api.interactions.commands.build.SubcommandData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,6 +25,17 @@ public abstract class AbstractSlashCommand implements ICommandComponent {
         if(Objects.nonNull(options))
             for(SlashCommandOption option : options)
                 this.commandData.addOption(option.optionType(), option.name(), option.description(), option.required());
+    }
+
+    public AbstractSlashCommand(@NotNull String name, @NotNull String description, SlashSubCommand... subcommands){
+        this.name = name;
+        this.commandData = Commands.slash(name, description);
+        for(SlashSubCommand slashSubCommand : subcommands){
+            SubcommandData subcommandData = new SubcommandData(slashSubCommand.name(), slashSubCommand.description());
+            for(SlashCommandOption option : slashSubCommand.options())
+                subcommandData.addOption(option.optionType(), option.name(), option.description(), option.required());
+            this.commandData.addSubcommands(subcommandData);
+        }
     }
 
     @Override
